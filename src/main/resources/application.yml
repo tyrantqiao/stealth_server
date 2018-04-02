@@ -1,0 +1,13 @@
+spring:
+  datasource:
+#  mysql encrypt all data except of the shake hands.(the method of encrypt is SSL)
+    url: jdbc:mysql://localhost:3306/stealth?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false
+    username: qiao
+    password: Tyrant
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    com.mysql.jdbc.Driver is deprecated, now replace with 'com.mysql.cj.jdbc.Driver'
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+      
