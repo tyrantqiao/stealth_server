@@ -17,7 +17,6 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous" />
 
-    <link th:href="@{css/style.css}" rel="stylesheet" />
 </head>
 
 <body class="gray-bg">
@@ -39,39 +38,26 @@
                  th:text="${errorMessage}"></div>
 
 
-            <div th:if="${#fields.hasErrors('firstName')}"
-                 th:errors="*{firstName}"
-                 class="validation-message alert alert-danger" role="alert"></div>
-
-            <div th:if="${#fields.hasErrors('lastName')}"
-                 th:errors="*{lastName}"
+            <div th:if="${#fields.hasErrors('name')}"
+                 th:errors="*{name}"
                  class="validation-message alert alert-danger" role="alert"></div>
 
             <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
                  class="validation-message alert alert-danger" role="alert"></div>
 
             <div class="form-group input-group has-feedback">
-                <label th:if="${#fields.hasErrors('firstName')}"
-                       th:errors="*{firstName}" class="validation-message"></label>
+                <label th:if="${#fields.hasErrors('name')}"
+                       th:errors="*{name}" class="validation-message"></label>
                 <span class="input-group-addon">
             <span class="glyphicon glyphicon-user"></span>
           </span>
 
-                <input type="text" th:field="*{firstName}"
+                <input type="text" th:field="*{name}"
                        placeholder="First Name" class="form-control" required />
                 <span class="glyphicon form-control-feedback"
                       aria-hidden="true"></span>
             </div>
 
-            <div class="form-group input-group has-feedback">
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-user"></span>
-          </span>
-                <input type="text" th:field="*{lastName}"
-                       placeholder="Last Name" class="form-control" required />
-                <span class="glyphicon form-control-feedback"
-                      aria-hidden="true"></span>
-            </div>
 
             <div class="form-group input-group has-feedback">
           <span class="input-group-addon">

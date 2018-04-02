@@ -46,7 +46,7 @@ dependencies {
     compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
     compile group: 'org.springframework.ldap', name: 'spring-ldap-core', version: '2.3.2.RELEASE'
     compile group: 'com.unboundid', name: 'unboundid-ldapsdk', version: '4.0.5'
-
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
 
     runtime('org.springframework.boot:spring-boot-devtools')
     runtime('mysql:mysql-connector-java')
