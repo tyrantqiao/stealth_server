@@ -5,6 +5,7 @@ import com.nulabinc.zxcvbn.Zxcvbn;
 import com.tyrantQiao.stealth.POJO.User;
 import com.tyrantQiao.stealth.service.EmailService;
 import com.tyrantQiao.stealth.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
