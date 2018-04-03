@@ -22,7 +22,6 @@ public class User {
 	@Column(name = "name")
 	private String name;
 
-	@NotEmpty(message = "input your password")
 	@Transient
 	@Column(name = "password")
 	private String password;
