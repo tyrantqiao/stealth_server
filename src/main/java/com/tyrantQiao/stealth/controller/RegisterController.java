@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/user")
 public class RegisterController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
 	private UserService userService;
@@ -58,6 +59,7 @@ public class RegisterController {
 		}
 
 		if (bindingResult.hasErrors()) {
+			System.out.println("erros: "+bindingResult.getAllErrors());
 			modelAndView.setViewName("register");
 		} else { // new user so we create user and send confirmation e-mail
 
@@ -66,7 +68,7 @@ public class RegisterController {
 
 			// Generate random 36-character string token for confirmation link
 			user.setConfirmationToken(UUID.randomUUID().toString());
-
+			System.out.println("confirmationToken is "+user.getConfirmationToken());
 			userService.saveUser(user);
 
 			String appUrl = request.getScheme() + "://" + request.getServerName();
@@ -74,9 +76,9 @@ public class RegisterController {
 			SimpleMailMessage registrationEmail = new SimpleMailMessage();
 			registrationEmail.setTo(user.getEmail());
 			registrationEmail.setSubject("Registration Confirmation");
-			registrationEmail.setText("To confirm your e-mail address, please click the link below:\n"
+			registrationEmail.setText("Do not reply, thanks. To confirm your e-mail address, please click the link below:\n"
 					+ appUrl + "/confirm?token=" + user.getConfirmationToken());
-			registrationEmail.setFrom("noreply@domain.com");
+			registrationEmail.setFrom("tyrantqiao@qq.com");
 
 			emailService.sendEmail(registrationEmail);
 

@@ -18,6 +18,8 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 
+	public User findByNameAndPassword(String name,String password){return userRepository.findByNameAndPassword(name,password);}
+	
 	public User findByConfirmationToken(String confirmationToken){
 		return userRepository.findByConfirmationToken(confirmationToken);
 	}

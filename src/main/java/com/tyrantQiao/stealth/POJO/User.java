@@ -80,4 +80,9 @@ public class User {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	@Override
+	public String toString() {
+		return "This is user "+this.getName()+" registered by "+this.getEmail()+", with confirmationToken "+this.getConfirmationToken()+". Enabled? "+this.isEnabled();
+	}
 }
