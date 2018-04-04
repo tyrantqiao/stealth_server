@@ -5,7 +5,6 @@ import com.nulabinc.zxcvbn.Zxcvbn;
 import com.tyrantQiao.stealth.POJO.User;
 import com.tyrantQiao.stealth.service.EmailService;
 import com.tyrantQiao.stealth.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,7 +24,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/user")
 public class RegisterController {
-	private BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
+	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	private UserService userService;
 	private EmailService emailService;
 
@@ -36,8 +35,8 @@ public class RegisterController {
 	}
 
 	// Return registration form template
-	@RequestMapping(value="/register", method = RequestMethod.GET)
-	public ModelAndView showRegistrationPage(ModelAndView modelAndView, User user){
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView showRegistrationPage(ModelAndView modelAndView, User user) {
 		modelAndView.addObject("user", user);
 		modelAndView.setViewName("register");
 		return modelAndView;
@@ -59,7 +58,7 @@ public class RegisterController {
 		}
 
 		if (bindingResult.hasErrors()) {
-			System.out.println("erros: "+bindingResult.getAllErrors());
+			System.out.println("erros: " + bindingResult.getAllErrors());
 			modelAndView.setViewName("register");
 		} else { // new user so we create user and send confirmation e-mail
 
@@ -68,7 +67,7 @@ public class RegisterController {
 
 			// Generate random 36-character string token for confirmation link
 			user.setConfirmationToken(UUID.randomUUID().toString());
-			System.out.println("confirmationToken is "+user.getConfirmationToken());
+			System.out.println("confirmationToken is " + user.getConfirmationToken());
 			userService.saveUser(user);
 
 			String appUrl = request.getScheme() + "://" + request.getServerName();
@@ -90,7 +89,7 @@ public class RegisterController {
 	}
 
 	// Process confirmation link
-	@RequestMapping(value="/confirm", method = RequestMethod.GET)
+	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
 	public ModelAndView showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
 
 		User user = userService.findByConfirmationToken(token);
@@ -106,7 +105,7 @@ public class RegisterController {
 	}
 
 	// Process confirmation link
-	@RequestMapping(value="/confirm", method = RequestMethod.POST)
+	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
 	public ModelAndView processConfirmationForm(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map requestParams, RedirectAttributes redir) {
 
 		modelAndView.setViewName("confirm");
