@@ -1,5 +1,7 @@
 package com.tyrantQiao.stealth.POJO;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -22,7 +24,6 @@ public class User {
 	@Column(name = "name")
 	private String name;
 
-	@Transient
 	@Column(name = "password")
 	private String password;
 

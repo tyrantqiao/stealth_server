@@ -36,8 +36,8 @@
              role="alert" th:text=${invalidToken}></div>
 
         <form th:if="!${invalidToken}" class="m-t" id="passwordForm" role="form" action="#"
-              th:object="${setPassword}" th:action="@{/confirm}" method="post">
-
+               th:action="@{/confirm}" method="post">
+        <!--I delete the th:object="${setPassword}" test if it works-->
             <input type="hidden" name="token" th:value=${confirmationToken}  >
 
             <div class="form-group input-group">
