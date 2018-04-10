@@ -18,7 +18,7 @@ public class User {
 	@Email(message = "input your email, you will receive a confirmation email")
 	@NotEmpty(message = "enter your email")
 	@Column(name = "email")
-	public String email;
+	private String email;
 
 	@NotEmpty(message = "input your name")
 	@Column(name = "name")

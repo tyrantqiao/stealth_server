@@ -21,8 +21,11 @@ import javax.validation.Valid;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * author: tyrantqiao
+ */
+
 @RestController
-@RequestMapping("/user")
 public class RegisterController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	private UserService userService;
@@ -34,7 +37,6 @@ public class RegisterController {
 		this.emailService = emailService;
 	}
 
-	// Return registration form template
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView showRegistrationPage(ModelAndView modelAndView, User user) {
 		modelAndView.addObject("user", user);
@@ -42,7 +44,6 @@ public class RegisterController {
 		return modelAndView;
 	}
 
-	// Process form input data
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult, HttpServletRequest request) {
 
@@ -62,10 +63,8 @@ public class RegisterController {
 			modelAndView.setViewName("register");
 		} else { // new user so we create user and send confirmation e-mail
 
-			// Disable user until they click on confirmation link in email
 			user.setEnabled(false);
 
-			// Generate random 36-character string token for confirmation link
 			user.setConfirmationToken(UUID.randomUUID().toString());
 			System.out.println("confirmationToken is " + user.getConfirmationToken());
 			userService.saveUser(user);
@@ -88,7 +87,6 @@ public class RegisterController {
 		return modelAndView;
 	}
 
-	// Process confirmation link
 	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
 	public ModelAndView showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
 
@@ -104,7 +102,6 @@ public class RegisterController {
 		return modelAndView;
 	}
 
-	// Process confirmation link
 	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
 	public ModelAndView processConfirmationForm(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map requestParams, RedirectAttributes redir) {
 
@@ -124,16 +121,12 @@ public class RegisterController {
 			return modelAndView;
 		}
 
-		// Find the user associated with the reset token
 		User user = userService.findByConfirmationToken((String) requestParams.get("token"));
 
-		// Set new password
 		user.setPassword(bCryptPasswordEncoder.encode((CharSequence) requestParams.get("password")));
 
-		// Set user to enabled
 		user.setEnabled(true);
 
-		// Save user
 		userService.saveUser(user);
 
 		modelAndView.addObject("successMessage", "Your password has been set!");
