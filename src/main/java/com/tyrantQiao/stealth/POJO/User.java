@@ -1,11 +1,8 @@
 package com.tyrantQiao.stealth.POJO;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user")
@@ -30,7 +27,7 @@ public class User {
 	@Column(name = "confirmationToken")
 	private String confirmationToken;
 
-	@Column(name="enabled")
+	@Column(name = "enabled")
 	private boolean enabled;
 
 
@@ -84,6 +81,6 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "This is user "+this.getName()+" registered by "+this.getEmail()+", with confirmationToken "+this.getConfirmationToken()+". Enabled? "+this.isEnabled();
+		return "This is user " + this.getName() + " registered by " + this.getEmail() + ", with confirmationToken " + this.getConfirmationToken() + ". Enabled? " + this.isEnabled();
 	}
 }
