@@ -82,7 +82,7 @@ public class RegisterController {
 	}
 
 	@GetMapping(value = "/confirm")
-	public ModelAndView showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
+	public void showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
 
 		User user = userService.findByConfirmationToken(token);
 
@@ -94,11 +94,8 @@ public class RegisterController {
 
 			user.setEnabled(true);
 			userService.saveUser(user);
-			System.out.println("successful create account");
+			System.out.println("successful create account:"+user.getName());
 		}
-
-		modelAndView.setViewName("confirm");
-		return modelAndView;
 	}
 
 	/**
