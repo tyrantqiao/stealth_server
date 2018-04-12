@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/user")
 public class LoginController {
 	private UserService userService;
 	private ResultService resultService;

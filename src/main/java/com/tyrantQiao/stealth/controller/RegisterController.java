@@ -1,7 +1,9 @@
 package com.tyrantQiao.stealth.controller;
 
+import com.tyrantQiao.stealth.POJO.Result;
 import com.tyrantQiao.stealth.POJO.User;
 import com.tyrantQiao.stealth.service.EmailService;
+import com.tyrantQiao.stealth.service.ResultService;
 import com.tyrantQiao.stealth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -26,11 +28,13 @@ public class RegisterController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	private UserService userService;
 	private EmailService emailService;
+	private ResultService resultService;
 
 	@Autowired
-	public RegisterController(UserService userService, EmailService emailService) {
+	public RegisterController(UserService userService, EmailService emailService, ResultService resultService) {
 		this.userService = userService;
 		this.emailService = emailService;
+		this.resultService = resultService;
 	}
 
 	@GetMapping(value = "/register")
@@ -41,12 +45,17 @@ public class RegisterController {
 	}
 
 	@PostMapping(value = "/register")
+	public Result<User> processRegistrationForm(@Valid User user) {
+		User userExists = userService.findByEmail(user.getEmail());
+		if (userExists != null) {
+			resultService.error(500,"already had account by email:"+user.getEmail(),user);
+		}
+	}
+
+	@PostMapping(value = "/register")
 	public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult, HttpServletRequest request) {
 
-		// Lookup user in database by e-mail
 		User userExists = userService.findByEmail(user.getEmail());
-
-		System.out.println(userExists);
 
 		if (userExists != null) {
 			modelAndView.addObject("alreadyRegisteredMessage", "Oops!  There is already a user registered with the email provided.");
@@ -94,7 +103,7 @@ public class RegisterController {
 
 			user.setEnabled(true);
 			userService.saveUser(user);
-			System.out.println("successful create account:"+user.getName());
+			System.out.println("successful create account:" + user.getName());
 		}
 	}
 

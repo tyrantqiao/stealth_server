@@ -28,4 +28,8 @@ public class ResultService {
 		result.setData(null);
 		return result;
 	}
+
+	public void error(int i, String s, User user) {
+		//TODO make the error can output user--data
+	}
 }
