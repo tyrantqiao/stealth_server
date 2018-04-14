@@ -15,6 +15,14 @@ public class ResultService {
 		return result;
 	}
 
+	public Result<User> success(User user,String msg){
+		var result=new Result<User>();
+		result.setData(user);
+		result.setMessage(msg);
+		result.setStatus(200);
+		return result;
+	}
+
 	public Result<User> error(ResultEnum resultEnum) {
 		var result=new Result<User>(resultEnum);
 		result.setData(null);
@@ -29,7 +37,12 @@ public class ResultService {
 		return result;
 	}
 
-	public void error(int i, String s, User user) {
+	public Result<User> error(int status, String errorMessage, User user) {
 		//TODO make the error can output user--data
+		var result=new Result<User>();
+		result.setData(user);
+		result.setMessage(errorMessage);
+		result.setStatus(status);
+		return result;
 	}
 }

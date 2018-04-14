@@ -16,7 +16,17 @@ public class EmailService {
 	}
 
 	@Async
-	public void sendEmail(SimpleMailMessage message){
+	public void sendEmail(SimpleMailMessage message) {
 		sender.send(message);
+	}
+
+	public SimpleMailMessage createMailMessage(String toEmail, String fromEmail, String emailSubject, String emailContent) {
+		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+		simpleMailMessage = new SimpleMailMessage();
+		simpleMailMessage.setTo(toEmail);
+		simpleMailMessage.setSubject(emailSubject);
+		simpleMailMessage.setText(emailContent);
+		simpleMailMessage.setFrom(fromEmail);
+		return simpleMailMessage;
 	}
 }
