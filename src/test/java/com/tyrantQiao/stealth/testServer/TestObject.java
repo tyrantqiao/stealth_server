@@ -13,8 +13,8 @@ import java.util.Random;
 public class TestObject {
 	@Test
 	public void testUnixTimeStamp(){
-		 Long unixTimeStamp=Instant.now().getEpochSecond();
-		 System.out.println(new Random().nextInt(10));
-		 System.out.println(unixTimeStamp.toString().substring(6));
+//		 Long unixTimeStamp=Instant.now().getEpochSecond();
+//		 System.out.println(new Random().nextInt(10));
+//		 System.out.println(unixTimeStamp.toString().substring(6));
 	}
 }

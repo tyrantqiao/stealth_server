@@ -1,6 +1,7 @@
 package com.tyrantQiao.stealth.service;
 
 import com.tyrantQiao.stealth.POJO.User;
+import com.tyrantQiao.stealth.mapper.UserMapper;
 import com.tyrantQiao.stealth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,11 @@ import java.util.List;
 @Service("userService")
 public class UserService {
 	private UserRepository userRepository;
+	private UserMapper userMapper;
+
+	public UserService(UserMapper userMapper) {
+		this.userMapper = userMapper;
+	}
 
 	@Autowired
 	public UserService(UserRepository userRepository) {
@@ -22,6 +28,10 @@ public class UserService {
 
 	public User findByNameAndPassword(String name, String password) {return userRepository.findByNameAndPassword(name, password);}
 
+	public User findById(Long id) {
+		return userMapper.findById(id);
+	}
+
 	public User findByConfirmationToken(String confirmationToken) {
 		return userRepository.findByConfirmationToken(confirmationToken);
 	}
@@ -30,7 +40,13 @@ public class UserService {
 		return userRepository.getAll();
 	}
 
+	public void deleteById(Long id) {userRepository.deleteById(id);}
+
 	public void saveUser(User user) {
 		userRepository.save(user);
+	}
+
+	public boolean isUserExist(Long id) {
+		return userMapper.isUserExist(id);
 	}
 }

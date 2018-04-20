@@ -1,12 +1,7 @@
 package com.tyrantQiao.stealth.POJO;
 
-import org.hibernate.annotations.GeneratorType;
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
-import org.springframework.context.annotation.Primary;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -26,28 +21,33 @@ public class Order {
 	@Column(name = "order_id", unique = true, length = 16)
 	private Long orderId;
 
+	@Column(name = "order_user_id", length = 8)
+	private Long orderUserId;
+
+	//TODO 购物车怎样实现
+//	private
+
 	private int orderChannel;
 	private int payType;
 	private int orderType;
-	private User user;
 
 	public Long getOrderId() {
 		return orderId;
 	}
 
 	//TODO make orderId Intelligent
-	public void setOrderId(){
-		long unixTimeStamp=Instant.now().getEpochSecond();
-		int dayOfMonth=LocalDate.now().getDayOfMonth();
+	public void setOrderId() {
+		long unixTimeStamp = Instant.now().getEpochSecond();
+		int dayOfMonth = LocalDate.now().getDayOfMonth();
 
 		String stringBuffer = String.valueOf(getOrderChannel()) +
 				getPayType() +
 				getOrderType() +
 				dayOfMonth +
-				Long.toString(unixTimeStamp).substring(6)+
+				Long.toString(unixTimeStamp).substring(6) +
 				new Random().nextInt(10);
 //				Long.toString(getUser().getId()).substring();
-		this.orderId=Long.getLong(stringBuffer);
+		this.orderId = Long.getLong(stringBuffer);
 	}
 
 	public void setOrderId(Long orderId) {
@@ -78,11 +78,11 @@ public class Order {
 		this.orderType = orderType;
 	}
 
-	public User getUser() {
-		return user;
+	public Long getOrderUserId() {
+		return orderUserId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Long userId) {
+		this.orderUserId = userId;
 	}
 }
