@@ -1,7 +1,7 @@
 package com.tyrantQiao.stealth.controller;
 
-import com.tyrantQiao.stealth.POJO.Result;
-import com.tyrantQiao.stealth.POJO.User;
+import com.tyrantQiao.stealth.data.Result;
+import com.tyrantQiao.stealth.entity.User;
 import com.tyrantQiao.stealth.enums.ResultEnum;
 import com.tyrantQiao.stealth.service.ResultService;
 import com.tyrantQiao.stealth.service.UserService;

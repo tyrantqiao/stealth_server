@@ -1,7 +1,7 @@
 package com.tyrantQiao.stealth.service;
 
-import com.tyrantQiao.stealth.POJO.Result;
-import com.tyrantQiao.stealth.POJO.User;
+import com.tyrantQiao.stealth.data.Result;
+import com.tyrantQiao.stealth.entity.User;
 import com.tyrantQiao.stealth.enums.ResultEnum;
 import org.springframework.stereotype.Service;
 

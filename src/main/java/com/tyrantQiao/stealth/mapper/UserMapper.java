@@ -1,9 +1,11 @@
 package com.tyrantQiao.stealth.mapper;
 
-import com.tyrantQiao.stealth.POJO.User;
+import com.tyrantQiao.stealth.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * author: TyrantQiao
@@ -17,4 +19,7 @@ public interface UserMapper {
 
 	@Select("SELECT * FROM user where id=#{id}")
 	User findById(@Param("id") Long id);
+
+	@Select("SELECT * FROM user where enabled=true")
+	List<User> getAll();
 }

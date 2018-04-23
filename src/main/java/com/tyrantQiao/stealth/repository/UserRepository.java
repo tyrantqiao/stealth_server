@@ -1,6 +1,6 @@
 package com.tyrantQiao.stealth.repository;
 
-import com.tyrantQiao.stealth.POJO.User;
+import com.tyrantQiao.stealth.entity.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +13,5 @@ public interface UserRepository extends CrudRepository<User,Long> {
 	User findByConfirmationToken(String confirmationToken);
 	User findByNameAndPassword(String name,String password);
 	void deleteById(Long id);
-	List<User> getAll();
+	List<User> getAllByEnabled(boolean enabled);
 }

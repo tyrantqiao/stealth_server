@@ -1,6 +1,6 @@
 package com.tyrantQiao.stealth.mapper;
 
-import com.tyrantQiao.stealth.POJO.Order;
+import com.tyrantQiao.stealth.entity.Orders;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -14,8 +14,8 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface OrderMapper {
 	@Select(value = "select * from order where orderId=#{orderId}")
-	Order findByOrderId(@Param("orderId") Long OrderId);
+	Orders findByOrderId(@Param("orderId") Long OrderId);
 
 	@Delete(value = "delete from order where orderId=#{orderId} ")
-	Order deleteByOrderId(@Param("orderId") Long orderId);
+	Orders deleteByOrderId(@Param("orderId") Long orderId);
 }

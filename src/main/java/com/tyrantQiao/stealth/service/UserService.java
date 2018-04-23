@@ -1,14 +1,16 @@
 package com.tyrantQiao.stealth.service;
 
-import com.tyrantQiao.stealth.POJO.User;
+import com.tyrantQiao.stealth.entity.User;
 import com.tyrantQiao.stealth.mapper.UserMapper;
 import com.tyrantQiao.stealth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service("userService")
+@Qualifier("userService")
 public class UserService {
 	private UserRepository userRepository;
 	private UserMapper userMapper;
@@ -37,7 +39,7 @@ public class UserService {
 	}
 
 	public List<User> getAllUsers() {
-		return userRepository.getAll();
+		return userMapper.getAll();
 	}
 
 	public void deleteById(Long id) {userRepository.deleteById(id);}

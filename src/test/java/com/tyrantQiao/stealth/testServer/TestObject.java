@@ -3,6 +3,8 @@ package com.tyrantQiao.stealth.testServer;
 import org.junit.Test;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -16,5 +18,7 @@ public class TestObject {
 //		 Long unixTimeStamp=Instant.now().getEpochSecond();
 //		 System.out.println(new Random().nextInt(10));
 //		 System.out.println(unixTimeStamp.toString().substring(6));
+		LocalDateTime localDateTime=LocalDateTime.now();
+		System.out.println(localDateTime.getDayOfMonth());
 	}
 }

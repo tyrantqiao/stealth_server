@@ -1,13 +1,13 @@
 package com.tyrantQiao.stealth.controller;
 
-import com.tyrantQiao.stealth.POJO.User;
-import com.tyrantQiao.stealth.service.OrderService;
-import com.tyrantQiao.stealth.service.RedisTemplateService;
-import com.tyrantQiao.stealth.service.ResultService;
+import com.tyrantQiao.stealth.entity.User;
+import com.tyrantQiao.stealth.mapper.UserMapper;
+import com.tyrantQiao.stealth.service.RedisUserService;
 import com.tyrantQiao.stealth.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,41 +24,39 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-
-	private UserService userService;
-	private OrderService orderService;
-	private ResultService resultService;
-	private RedisTemplateService redisTemplateService;
-
 	@Autowired
-	public UserController(RedisTemplateService redisTemplateService, UserService userService, OrderService orderService, ResultService resultService) {
-		this.redisTemplateService = redisTemplateService;
-		this.userService = userService;
-		this.orderService = orderService;
-		this.resultService = resultService;
+	@Qualifier("userService")
+	private UserService userService;
+	@Autowired
+	@Qualifier("redisUserService")
+	private RedisUserService redisUserService;
+	private UserMapper userMapper;
+
+	public UserController(UserMapper userMapper) {
+		this.userMapper = userMapper;
 	}
 
 	@GetMapping("/getAll")
-	public List<User> getAllUser() {
-		return userService.getAllUsers();
+	public List<User> getAll() {
+		return userMapper.getAll();
 	}
 
 	@GetMapping("/get")
 	public User getUserById(@RequestParam(name = "id") Long id) {
 		try {
-			if (redisTemplateService.isValueExist(id)) {
-				return (User) redisTemplateService.loadObject(id);
+			if (redisUserService.isValueExist(id)) {
+				return (User) redisUserService.loadObject(id);
 			} else {
-				redisTemplateService.lock(id);
-				if (redisTemplateService.isValueExist(id)) {
-					return (User) redisTemplateService.loadObject(id);
+				redisUserService.lock(id);
+				if (redisUserService.isValueExist(id)) {
+					return (User) redisUserService.loadObject(id);
 				} else {
 					if (userService.isUserExist(id)) {
 						User user = userService.findById(id);
-						redisTemplateService.saveObject(id, user);
+						redisUserService.saveObject(id, user);
 						return user;
 					} else {
-						redisTemplateService.saveObject(id, null);
+						redisUserService.saveObject(id, null);
 						return null;
 					}
 				}
@@ -66,7 +64,7 @@ public class UserController {
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
-
+			redisUserService.unlock();
 		}
 		return null;
 	}

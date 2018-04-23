@@ -1,6 +1,6 @@
 buildscript {
-    ext{
-        springBootVersion='2.0.0.RELEASE'
+    ext {
+        springBootVersion = '2.0.1.RELEASE'
     }
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' }
@@ -13,18 +13,21 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "gradle.plugin.se.patrikerdes:gradle-use-latest-versions-plugin:0.2.1"
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE"
     }
 }
 
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'se.patrikerdes.use-latest-versions'
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
+apply plugin: "org.springframework.boot"
 apply plugin: 'io.spring.dependency-management'
-sourceCompatibility = 1.8
 
-group='com.qiao'
-version='1.0-SNAPSHOT'
+group = 'com.qiao'
+version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -45,7 +48,10 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-redis')
     compile('org.springframework.boot:spring-boot-starter-data-redis-reactive')
     compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2")
-    compile group: 'com.nulab-inc', name: 'zxcvbn', version: '1.2.4'
+
+    compile 'org.redisson:redisson:3.6.5'
+    compile group: 'com.google.inject', name: 'guice', version: '4.2.0'
+    compile group: 'com.nulab-inc', name: 'zxcvbn', version: '1.2.5'
     compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
     compile group: 'org.springframework.ldap', name: 'spring-ldap-core', version: '2.3.2.RELEASE'
     compile group: 'com.unboundid', name: 'unboundid-ldapsdk', version: '4.0.5'

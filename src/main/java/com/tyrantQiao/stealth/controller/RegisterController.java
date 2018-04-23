@@ -1,6 +1,6 @@
 package com.tyrantQiao.stealth.controller;
 
-import com.tyrantQiao.stealth.POJO.User;
+import com.tyrantQiao.stealth.entity.User;
 import com.tyrantQiao.stealth.service.EmailService;
 import com.tyrantQiao.stealth.service.ResultService;
 import com.tyrantQiao.stealth.service.UserService;
