@@ -1,9 +1,6 @@
 package com.tyrantqiao.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -14,20 +11,20 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "orders")
-
-public class Orders implements Serializable {
+public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * orderChannel(1)+PayType(1)+orderType(1)+Date-Month-day(4)+Unix-date(4)+Random(1)+id(4) = 16
 	 */
 	@Id
-	@Column(name = "order_id", unique = true, length = 16)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "order_id")
 	private Long orderId;
 
 	@Column(name = "order_user_id", length = 8)
 	private Long orderUserId;
 
-	public Orders(Long orderId, Long orderUserId) {
+	public Order(Long orderId, Long orderUserId) {
 		this.orderId = orderId;
 		this.orderUserId = orderUserId;
 	}

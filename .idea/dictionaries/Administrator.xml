@@ -3,12 +3,15 @@
     <words>
       <w>alibaba</w>
       <w>defind</w>
+      <w>findstr</w>
       <w>inno</w>
       <w>jedis</w>
+      <w>netstat</w>
       <w>notfound</w>
       <w>qiao</w>
       <w>redisson</w>
       <w>smtp</w>
+      <w>taskkill</w>
       <w>tyrantqiao</w>
     </words>
   </dictionary>
