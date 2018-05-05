@@ -1,6 +1,7 @@
 package com.tyrantqiao.service;
 
 import com.tyrantqiao.entity.Order;
+import com.tyrantqiao.entity.User;
 import com.tyrantqiao.mapper.OrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,9 +25,13 @@ public class OrderService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
 
 	private OrderMapper orderMapper;
+	private RedisTemplate<String, User> redisTemplate;
 
 	@Autowired
-	public OrderService(OrderMapper orderMapper) {this.orderMapper = orderMapper;}
+	public OrderService(OrderMapper orderMapper, RedisTemplate<String, User> redisTemplate) {
+		this.orderMapper = orderMapper;
+		this.redisTemplate = redisTemplate;
+	}
 
 
 	@CacheEvict(cacheNames = "order1", key = "#orderId")
