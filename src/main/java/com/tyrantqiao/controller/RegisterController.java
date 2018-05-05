@@ -45,7 +45,7 @@ public class RegisterController {
 			modelAndView.setViewName("register");
 			return modelAndView;
 		} catch (Exception e) {
-			User userExists = userService.findByEmail(user.getEmail());
+			User userExists = userService.getByEmail(user.getEmail());
 			modelAndView.setView(new MappingJackson2JsonView());
 			if (userExists != null) {
 				modelAndView.addObject(
@@ -77,7 +77,7 @@ public class RegisterController {
 
 //	@PostMapping(value = "/register")
 //	public Result<User> processRegistrationForm(@Valid User user, HttpServletRequest request) {
-//		User userExists = userService.findByEmail(user.getEmail());
+//		User userExists = userService.getByEmail(user.getEmail());
 //		if (userExists != null) {
 //			return resultService.error(500, "already had account by email:" + user.getEmail(), user);
 //		} else {
@@ -101,7 +101,7 @@ public class RegisterController {
 	@PostMapping(value = "/register")
 	public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult, HttpServletRequest request) {
 
-		User userExists = userService.findByEmail(user.getEmail());
+		User userExists = userService.getByEmail(user.getEmail());
 
 		if (userExists != null) {
 			modelAndView.addObject("alreadyRegisteredMessage", "Oops!  There is already a user registered with the email provided.");
@@ -139,7 +139,7 @@ public class RegisterController {
 	@GetMapping(value = "/confirm")
 	public void showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
 
-		User user = userService.findByConfirmationToken(token);
+		User user = userService.getByConfirmationToken(token);
 
 		if (user == null) {
 			modelAndView.addObject("invalidToken", "Oops!  This is an invalid confirmation link.");
@@ -175,7 +175,7 @@ public class RegisterController {
 //			return modelAndView;
 //		}
 //
-//		User user = userService.findByConfirmationToken((String) requestParams.get("token"));
+//		User user = userService.getByConfirmationToken((String) requestParams.get("token"));
 //
 //		user.setPassword(bCryptPasswordEncoder.encode((CharSequence) requestParams.get("password")));
 //

@@ -3,6 +3,8 @@ package com.tyrantqiao;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * 如果遇到了8080端口被占用的情况（指windows）
@@ -11,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author tyrantqiao [tyrantqiao@gmail.com]
  */
 @SpringBootApplication
+@EnableCaching
+@EnableTransactionManagement
 @MapperScan("com.tyrantqiao.mapper")
 public class StealthApplication {
 	public static void main(String[] args) {

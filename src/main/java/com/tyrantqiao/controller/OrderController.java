@@ -1,7 +1,7 @@
 package com.tyrantqiao.controller;
 
 import com.tyrantqiao.entity.Order;
-import com.tyrantqiao.mapper.OrderMapper;
+import com.tyrantqiao.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/order")
 public class OrderController {
-	private OrderMapper orderMapper;
+	private OrderService orderService;
 
 	@Autowired
-	public OrderController(OrderMapper orderMapper) {
-		this.orderMapper = orderMapper;
+	public OrderController(OrderService orderService) {
+		this.orderService = orderService;
 	}
 
 	/**
@@ -30,11 +30,20 @@ public class OrderController {
 	@GetMapping("/add")
 	public void addOrder() {
 		Order testAddOrder = new Order(1L, 111L);
-		orderMapper.insertOrder(testAddOrder);
+		orderService.insert(testAddOrder);
 	}
 
 	@GetMapping("/get")
 	public Order getOrderById(@RequestParam(name = "orderUserId") Long orderUserId) {
-		return orderMapper.getByOrderUserId(orderUserId);
+		return orderService.getByOrderUserId(orderUserId);
+	}
+
+	/**
+	 * 因为我们没有发出delete的请求，而是通过service调用mapper删除，这个本质上只是{@code @GetMapping()}
+	 * @param orderId
+	 */
+	@GetMapping("/delete")
+	public void deleteOrderByOrderId(@RequestParam(name = "orderId") Long orderId) {
+		orderService.deleteOrderByOrderId(orderId);
 	}
 }

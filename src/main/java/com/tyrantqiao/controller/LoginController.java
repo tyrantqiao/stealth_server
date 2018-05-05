@@ -26,7 +26,7 @@ public class LoginController {
 
 	@PostMapping(value = "/login")
 	public ModelAndView processLoginPage(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult) {
-		User userExists = userService.findByNameAndPassword(user.getName(), user.getPassword());
+		User userExists = userService.getByNameAndPassword(user.getName(), user.getPassword());
 
 		if (userExists == null) {
 			modelAndView.addObject("errorMessage", "Name or password is wrong, or you might not register the account.");
@@ -47,7 +47,7 @@ public class LoginController {
 	@GetMapping(value = "/login")
 	@ResponseBody
 	public Result processLoginPage(@RequestParam("name") String name, @RequestParam("password") String password, BindResult bindResult) {
-		User userExists = userService.findByNameAndPassword(name, password);
+		User userExists = userService.getByNameAndPassword(name, password);
 		if (userExists != null) {
 			return resultService.success(userExists);
 		}

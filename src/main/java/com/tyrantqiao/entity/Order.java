@@ -44,4 +44,12 @@ public class Order implements Serializable {
 	public void setOrderUserId(Long orderUserId) {
 		this.orderUserId = orderUserId;
 	}
+
+	@Override
+	public String toString() {
+		return "Order{" +
+				"orderId=" + orderId +
+				", orderUserId=" + orderUserId +
+				'}';
+	}
 }

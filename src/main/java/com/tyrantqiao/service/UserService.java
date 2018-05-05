@@ -2,6 +2,8 @@ package com.tyrantqiao.service;
 
 import com.tyrantqiao.entity.User;
 import com.tyrantqiao.mapper.UserMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -19,6 +21,7 @@ import java.util.List;
 @Service("userService")
 @CacheConfig(cacheNames = "users")
 public class UserService {
+	private static Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 	private UserMapper userMapper;
 
 	@Autowired
@@ -26,20 +29,25 @@ public class UserService {
 		this.userMapper = userMapper;
 	}
 
+	/**
+	 * 通过KEYS * 查询
+	 * @param email
+	 * @return
+	 */
 	@Cacheable(cacheNames = "user1", key = "#email")
-	public User findByEmail(String email) {
+	public User getByEmail(String email) {
 		return userMapper.findByEmail(email);
 	}
 
-	public User findByNameAndPassword(String name, String password) {return userMapper.findByNameAndPassword(name, password);}
+	public User getByNameAndPassword(String name, String password) {return userMapper.findByNameAndPassword(name, password);}
 
 	@Cacheable(cacheNames = "user1", key = "#id")
-	public User findById(Long id) {
-		return userMapper.findById(id);
+	public User getById(Long id) {
+		return userMapper.getById(id);
 	}
 
 	@Cacheable(cacheNames = "user1", key = "#confirmationToken")
-	public User findByConfirmationToken(String confirmationToken) {
+	public User getByConfirmationToken(String confirmationToken) {
 		return userMapper.findByConfirmationToken(confirmationToken);
 	}
 

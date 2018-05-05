@@ -22,7 +22,7 @@ public class InitConfigurer {
 
 	@PostConstruct
 	public void init() {
-		User user = userMapper.findById(1L);
+		User user = userMapper.getById(1L);
 		System.out.println(user);
 	}
 }

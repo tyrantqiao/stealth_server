@@ -37,7 +37,7 @@ public interface UserMapper extends BaseMapper<User> {
 	 * @return user
 	 */
 	@Select("SELECT * FROM user where id=#{id}")
-	User findById(@Param("id") Long id);
+	User getById(@Param("id") Long id);
 
 	/**
 	 * all user
@@ -48,7 +48,7 @@ public interface UserMapper extends BaseMapper<User> {
 	List<User> getAll();
 
 	/**
-	 * findByEmail
+	 * getByEmail
 	 *
 	 * @param email
 	 * @return
