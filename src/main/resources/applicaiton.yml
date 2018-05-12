@@ -1,0 +1,8 @@
+#thymeleafspring:
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: html
+    #allow change the html without restart application
+    cache: false
+    

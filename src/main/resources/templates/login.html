@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, inital-scale=1"/>
-    <meta name="description" content=""/>
-    <meta name="author" content="Tyrant Qiao"/>
+    <meta name="viewport"
+          content="width=device-width, inital-scale=1"/>
+    <meta name="description"
+          content=""/>
+    <meta name="author"
+          content="Tyrant Qiao"/>
     <title>stealth_login</title>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           rel="stylesheet"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
@@ -99,23 +104,41 @@
         <hr/>
         <h4>Login your account</h4>
 
-        <div th:if="${errorMessage}" class="alert alert-success"
-             role="alert" th:text=${errorMessage}></div>
+        <div th:if="${errorMessage}"
+             class="alert alert-success"
+             role="alert"
+             th:text=${errorMessage}></div>
 
-        <div th:if="${successMessage}" class="alert alert-danger"
-             role="alert" th:text=${successMessage}></div>
+        <div th:if="${successMessage}"
+             class="alert alert-danger"
+             role="alert"
+             th:text=${successMessage}></div>
 
-        <form class="m-t" id="loginForm" role="form" action="#"
-              th:action="@{/login}" method="post">
-        <!--th:object="${loginAccount}"-->
-            <input type="hidden" name="token" th:value=${confirmationToken}>
+        <form class="m-t"
+              id="loginForm"
+              role="form"
+              action="#"
+              th:action="@{/login}"
+              method="post">
+            <!--th:object="${loginAccount}"-->
+            <input type="hidden"
+                   name="token"
+                   th:value=${confirmationToken}>
 
             <div class="form-group input-group">
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-lock"></span>
           </span>
-                <input name="name" type="text" id="name" placeholder="Username" class="nameValue"/>
-                <input name="password" type="password" id="password" placeholder="Password" class="form-control"
+                <input name="name"
+                       type="text"
+                       id="name"
+                       placeholder="Username"
+                       class="nameValue"/>
+                <input name="password"
+                       type="password"
+                       id="password"
+                       placeholder="Password"
+                       class="form-control"
                        required/>
                 <span class="glyphicon"
                       aria-hidden="true"></span>
@@ -125,8 +148,12 @@
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-lock"></span>
           </span>
-                <input type="password" class="form-control" id="login-process" placeholder="Enter Password"
-                       name="EnterPassword" data-fv-notempty="true"
+                <input type="password"
+                       class="form-control"
+                       id="login-process"
+                       placeholder="Enter Password"
+                       name="EnterPassword"
+                       data-fv-notempty="true"
                        data-fv-notempty-message="Please enter password"
                        data-fv-identical="true"
                        data-fv-identical-field="password"/>
